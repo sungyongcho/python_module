@@ -6,24 +6,15 @@ if [ -d "/goinfre" ]; then
   export MYPATH="/goinfre/$USER/miniconda3"
 else
   echo "setting MYPATH for mac\n"
-  export MYPATH="/miniconda3"
+  export MYPATH="/Users/$USER/Documents/miniconda3/"
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
 	# For MAC
-	if [ -e Miniconda3-latest-MacOSX-x86_64.sh ]; then
-		echo "Miniconda3 intallation file already exists; continuing..."
-	else
-		curl -LO "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh"
-	fi
+	curl -LO "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh"
 	sh Miniconda3-latest-MacOSX-x86_64.sh -b -p $MYPATH
 elif [[ "$(uname)" == "Linux" ]]; then
-
-	if [ -e "Miniconda3-latest-Linux-x86_64.sh" ]; then
-		echo "Miniconda3 intallation file already exists; continuing..."
-	else
-		curl -LO "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-	fi
+	curl -LO "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
 	sh Miniconda3-latest-Linux-x86_64.sh -b -p $MYPATH
 fi
 
@@ -37,4 +28,9 @@ source ~/.zshrc
 # $MYPATH/bin/conda config --set auto_activate_base false
 # source ~/.bash_profile
 
-conda create --name 42AI-$USER python=3.7 jupyter pandas pycodestyle numpy -y
+
+if [[ "$USER" == "sucho" ]]; then
+	conda create --name 42AI-$USER python=3.7 jupyter pandas pycodestyle numpy -y
+else
+	conda create --name 42AI-sucho python=3.7 jupyter pandas pycodestyle numpy -y
+fi
