@@ -37,4 +37,4 @@ source ~/.zshrc
 # $MYPATH/bin/conda config --set auto_activate_base false
 # source ~/.bash_profile
 
-conda create --name 42AI-$USER python=3.7 jupyter pandas pycodestyle -y
+conda create --name 42AI-$USER python=3.7 jupyter pandas pycodestyle numpy -y
