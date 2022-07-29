@@ -9,5 +9,4 @@ list
 print(list.reverse())
 
 for i in range(len(args)):
-    print("",end='', sep='')
-
+    print("", end='', sep='')
