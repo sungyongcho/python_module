@@ -12,7 +12,10 @@ def operations(a, b):
     print("Difference:\t", a-b)
     print("Product:\t", a*b)
     try:
-        print("Quotient:\t", a/b)
+        if(str(a/b)[::-1].find('.') > 3):
+            print("Quotient:\t", str(round(a/b, 3)) + '...')
+        else:
+            print("Quotient:\t", a/b)
     except ZeroDivisionError:
         print("Quotient:\t ERROR (division by zero)")
     try:
