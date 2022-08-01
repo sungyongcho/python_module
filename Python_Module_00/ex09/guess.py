@@ -50,3 +50,4 @@ if __name__ == "__main__":
         else:
             print("Too Low!")
         user_input = get_user_input()
+    print("Goodbye!")
