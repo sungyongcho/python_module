@@ -1,6 +1,6 @@
-import sys
+# before using tqdm it needs to be installed
 from tqdm import tqdm
-import time
+
 from time import sleep
 
 
@@ -8,8 +8,8 @@ from time import sleep
 #      https://stackoverflow.com/questions/54362541/how-to-change-tqdms-bar-size
 #      https://stackoverflow.com/questions/57473107/how-to-set-the-r-bar-part-of-tqdm
 
+
 def ft_progress2(listy):
-    # output = tqdm(listy)
     return tqdm(listy,
                 bar_format="ETA: {remaining_s:.2f}s " +
                            "[{desc}: {percentage:.0f}%] " +
