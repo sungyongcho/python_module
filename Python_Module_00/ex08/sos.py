@@ -11,7 +11,7 @@ sys.tracebacklimit = 0
 morse_list = []
 
 
-def alpha_to_morse(char):
+def alphanumeric_to_morse_list(char):
     if (char.upper() == 'A'):
         morse_list.append(".-")
     elif (char.upper() == 'B'):
@@ -95,11 +95,10 @@ def sos(list):
                 print("ERROR")
                 return
             else:
-                alpha_to_morse(list[i][j])
+                alphanumeric_to_morse_list(list[i][j])
     print(*morse_list)
 
 
-# Part 2
 if __name__ == "__main__":
     if (len(sys.argv) == 1):
         print(end="")
