@@ -1,5 +1,3 @@
-# Part 1
-
 import sys
 
 # for string.punctuation
