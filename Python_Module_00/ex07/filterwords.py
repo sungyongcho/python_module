@@ -6,7 +6,7 @@ import sys
 import string
 
 # for not printing traceback
-# sys.tracebacklimit = 0
+sys.tracebacklimit = 0
 
 
 def filterwords(input_string, num):
