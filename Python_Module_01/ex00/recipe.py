@@ -59,14 +59,3 @@ class Recipe:
         txt += "  Description: " + self.description + "\n"
         txt += "  Recipe type: " + self.recipe_type + "\n"
         return txt
-
-
-# test = Recipe('aaa', 1, ['', 'aa', 'bb'], "aaaaaaaaaa bbbbbbbbbb. dddddddddd.", "LUnch")
-
-# print(test.name)
-# print(test.cooking_lvl)
-# print(test.ingredients)
-# print(test.description)
-# print(test.recipe_type)
-
-# print(test)

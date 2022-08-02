@@ -4,11 +4,13 @@ import datetime
 from recipe import Recipe
 
 
-
 class Book:
 
-    def __init__(self):
-        self.name = ""
+    def __init__(self, name=None):
+        if name:
+            self.name = name
+        else:
+            self.name = ""
         self.last_update = datetime.time()
         self.creation_date = datetime.datetime.now()
         self.recipes_list = {
@@ -25,14 +27,12 @@ class Book:
                     return recipe
         # gen = (recipe.name for recipe in recipe_set if recipe.name == name)
 
-
     def get_recipes_by_types(self, recipe_type):
         """Get all recipe names for a given recipe_type """
         name_list = []
         for recipe in self.recipes_list.get(recipe_type):
             name_list.append(recipe.name)
         return name_list
-
 
     def add_recipe(self, recipe):
         """Add a recipe to the book and update last_update"""
