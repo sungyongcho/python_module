@@ -8,6 +8,7 @@ ops = {"+": operator.add,
 
 # todo:
 # exeception handling for elements of vector
+# raise NotImplemented for vector * vector
 
 
 class Vector:

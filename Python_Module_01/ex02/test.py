@@ -1,6 +1,9 @@
 from re import I
 from vector import Vector
 
+# todo:
+# clean up tester
+
 # row vector
 print("# row vector")
 print()
