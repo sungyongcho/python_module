@@ -8,11 +8,19 @@ import os
 
 def log(func):
     # def wrapper(self, *args, **kwargs):
-    def wrapper(*args, **kwargs):
-        print(func.__name__, 'begin')
-        # print("self:", self)
-        print(args, kwargs)
-        print(func.__name__, 'end')
+    def wrapper(self, *args, **kwargs):
+        f = open("./log", "a")
+        start_time = time.time()
+        if (args):
+            r = func(self, *args)
+        else:
+            r = func(self)
+        exec_time = (time.time() - start_time) * 1000
+        f.write("(" + os.getenv("USER", default="user_id") + ")" +
+                "Running:" + func.__name__ +
+                ": {0} {1}\n".format((exec_time / 1000 if exec_time > 1 else exec_time), 's' if exec_time > 1000 else 'ms'))
+        f.close()
+        return r
     return wrapper
 
 
@@ -50,8 +58,8 @@ class CoffeeMachine():
 if __name__ == "__main__":
 
     machine = CoffeeMachine()
-    # for i in range(0, 5):
-    #     machine.make_coffee()
+    for i in range(0, 5):
+        machine.make_coffee()
 
     machine.make_coffee()
     machine.add_water(70)
