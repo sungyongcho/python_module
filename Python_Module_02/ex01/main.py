@@ -1,13 +1,20 @@
-def what_are_the_vars(...):
+def what_are_the_vars(*args, **kwargs):
     """
     idk
     """
-    # ... Your code here ...
+    obj = ObjectC()
+    for i, arg in enumerate(args):
+        setattr(obj, f"var_{i}", arg)
+    for key, value in kwargs.items():
+        if hasattr(obj, key):
+            return None
+        setattr(obj, key, value)
+    return obj
 
 
 class ObjectC(object):
     def __init__(self):
-        # ... Your code here ...
+        pass
 
 
 def doom_printer(obj):
