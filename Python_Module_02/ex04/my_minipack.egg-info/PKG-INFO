@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: my-minipack
+Version: 1.0.0
+Summary: Howto create a package in python.
+Home-page: None
+Author: Sungyong Cho
+Author-email: sucho@student.42.fr
+License: FAKE
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Students
+Classifier: Topic :: Education
+Classifier: Topic :: HowTo
+Classifier: Topic :: Package
+Classifier: License :: FAKE
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+License-File: LICENSE
+
+UNKNOWN
+

@@ -1,0 +1,2 @@
+- README.md for Python Module 02, ex04
+	- please refer to [this](https://cdn.intra.42.fr/pdf/pdf/54995/en.subject.pdf)
