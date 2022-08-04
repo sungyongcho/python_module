@@ -16,9 +16,18 @@ def log(func):
         else:
             r = func(self)
         exec_time = (time.time() - start_time) * 1000
-        f.write("(" + os.getenv("USER", default="user_id") + ")" +
-                "Running:" + func.__name__ +
-                ": {0} {1}\n".format((exec_time / 1000 if exec_time > 1 else exec_time), 's' if exec_time > 1000 else 'ms'))
+        to_write = "(" + os.getenv("USER", default="user_id") + ")" + \
+                   "Running: " + \
+                   f"{func.__name__.replace('_', ' ').title():18}"
+        if exec_time > 1000:
+            print(f"{exec_time : .3f}", f"{exec_time / 1000: .3f}")
+            to_write += f" [exec-time = {exec_time / 1000: .3f} s]\n"
+        else:
+            print(f"{exec_time : .3f}", f"{exec_time : .3f}")
+            to_write += f" [exec-time = {exec_time: .3f} ms]\n"
+
+        f.write(to_write)
+
         f.close()
         return r
     return wrapper
@@ -27,7 +36,7 @@ def log(func):
 class CoffeeMachine():
     water_level = 100
 
-    @log
+    @ log
     def start_machine(self):
         if self.water_level > 20:
             return True
@@ -35,11 +44,11 @@ class CoffeeMachine():
             print("Please add water!")
             return False
 
-    @log
+    @ log
     def boil_water(self):
         return "boiling..."
 
-    @log
+    @ log
     def make_coffee(self):
         if self.start_machine():
             for _ in range(20):
@@ -48,7 +57,7 @@ class CoffeeMachine():
             print(self.boil_water())
             print("Coffee is ready!")
 
-    @log
+    @ log
     def add_water(self, water_level):
         time.sleep(randint(1, 5))
         self.water_level += water_level
