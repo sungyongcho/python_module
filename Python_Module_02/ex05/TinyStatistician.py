@@ -1,6 +1,6 @@
 import numpy
 
-##todo: didn't do anything for array
+##todo: didn't do anything for array and numpy
 
 class TinyStatistician(object):
 
