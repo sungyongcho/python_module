@@ -20,14 +20,10 @@ def log(func):
                    "Running: " + \
                    f"{func.__name__.replace('_', ' ').title():18}"
         if exec_time > 1000:
-            print(f"{exec_time : .3f}", f"{exec_time / 1000: .3f}")
             to_write += f" [exec-time = {exec_time / 1000: .3f} s]\n"
         else:
-            print(f"{exec_time : .3f}", f"{exec_time : .3f}")
             to_write += f" [exec-time = {exec_time: .3f} ms]\n"
-
         f.write(to_write)
-
         f.close()
         return r
     return wrapper
