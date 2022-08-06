@@ -1,6 +1,7 @@
 import numpy
 
-##todo: didn't do anything for array and numpy
+# todo: didn't do anything for array and numpy
+
 
 class TinyStatistician(object):
 
@@ -8,27 +9,48 @@ class TinyStatistician(object):
         pass
 
     def mean(self, x):
+        sum = 0
         if x == []:
             return None
-        if isinstance(x, numpy.ndarray):
-            return numpy.sum(x) / x.size
-        return sum(x) / len(x)
+        for item in x:
+            sum += item
+        return float(sum / len(x))
 
     def median(self, x):
         if x == []:
             return None
         if len(x) == 1:
             return float(x[0])
-        return float(sorted(x)[int(len(x) / 2 - 1) + (1 if len(x) % 2 is not 0 else 0)])
+        tmp = x[:]
+        tmp.sort()
+        if (len(tmp) % 2 == 0):
+            return float((tmp[int(len(tmp) / 2)] + tmp[int(len(tmp) / 2) + 1])
+                         / 2)
+        else:
+            return float(tmp[int(len(tmp) / 2)])
 
     def quartile(self, x):
-        print("c", x)
+        tmp = x[:]
+        tmp.sort()
+        median_val = self.median(x)
+        # print("tmp", [i for i in tmp if i <= median_val],
+        #       [i for i in tmp if i >= median_val])
+        if (len(x) % 2 == 0):
+            return [self.median(tmp[0:int(len(tmp) / 2)]),
+                    self.median(tmp[int(len(tmp) / 2):len(tmp)])]
+        else:
+            return [self.median(tmp[0:int(len(tmp) / 2) + 1]),
+                    self.median(tmp[int(len(tmp) / 2): len(tmp)])]
 
     def var(self, x):
-        print("d", x)
+        mean = self.mean(x)
+        sum = 0
+        for item in x:
+            sum += (item - mean) ** 2
+        return sum / len(x)
 
     def std(self, x):
-        print("e", x)
+        return self.var(x)**(1/2)
 
 
 if __name__ == "__main__":
@@ -38,11 +60,12 @@ if __name__ == "__main__":
     print(tstat.mean(a))
     # Expected result: 82.4
     print(tstat.median(a))
-    print(tstat.median([0,1]))
     # Expected result: 42.0
-    tstat.quartile(a)
+    b = [1, 42, 300, 10, 59, 60, 11, 12]
+    print("a", tstat.quartile(a))
+    print("b", tstat.quartile(b))
     # Expected result: [10.0, 59.0]
-    tstat.var(a)
+    print(tstat.var(a))
     # Expected result: 12279.439999999999
-    tstat.std(a)
+    print(tstat.std(a))
     # Expected result: 110.81263465868862
