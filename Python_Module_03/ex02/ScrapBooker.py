@@ -1,3 +1,4 @@
+from hashlib import new
 import numpy as np
 
 
@@ -17,7 +18,7 @@ class ScrapBooker():
         position: tuple of 2 integers.
         Return:
         -------
-        new_arr: the cropped numpy.ndarray.
+        new_arr: the cropped numpy.ndarra  y.
         None (if combinaison of parameters not compatible).
         Raise:
         ------
@@ -48,6 +49,11 @@ class ScrapBooker():
         ------
         This function should not raise any Exception.
         """
+        new_arr = array[:]
+
+        new_arr = np.delete(new_arr, np.arange(
+            n - 1, new_arr[0].size, n), 1 if axis is 0 else 0)
+        return new_arr
 
     def juxtapose(self, array, n, axis):
         """
@@ -65,6 +71,12 @@ class ScrapBooker():
         -------
         This function should not raise any Exception.
         """
+        if not isinstance(array, np.ndarray) or not isinstance(n, int) or n <= 0 or axis not in (0, 1):
+            return None
+        if axis:
+            return np.tile(array, (1, n))
+        else:
+            return np.tile(array, (n, 1))
 
     def mosaic(self, array, dim):
         """
@@ -82,6 +94,11 @@ class ScrapBooker():
         -------
         This function should not raise any Exception.
         """
+        if not isinstance(array, np.ndarray) or not isinstance(dim, tuple):
+            return None
+        if not isinstance(dim[0], int) or not isinstance(dim[1], int) or dim[0] <= 0 or dim[1] <= 0:
+            return None
+        return np.tile(array, dim)
 
 
 if __name__ == "__main__":
@@ -90,8 +107,11 @@ if __name__ == "__main__":
     print(arr1)
     print(spb.crop(arr1, (3, 1), (1, 0)))
 
-    # arr2 = np.array("A B C D E F G H I".split() * 6).reshape(-1, 9)
-    # spb.thin(arr2, 3, 0)
+    arr2 = np.array("A B C D E F G H I".split() * 6).reshape(-1, 9)
+    print(spb.thin(arr2, 3, 0))
 
-    # arr3 = np.array([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
-    # spb.juxtapose(arr3, 3, 1)
+    arr3 = np.array([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+    print(spb.juxtapose(arr3, 3, 1))
+
+    arr4 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+    print(spb.mosaic(arr4, (2, 5)))
