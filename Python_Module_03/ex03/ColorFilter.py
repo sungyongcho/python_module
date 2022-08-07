@@ -21,7 +21,8 @@ class ColorFilter:
         This function should not raise any Exception.
         """
         copy = np.copy(arr)
-        print(copy)
+        # ref: https://stackoverflow.com/questions/47382482/inverting-pixels-of-an-rgb-image-in-python
+        copy[:, :, :3] = 1 - copy[:, :, :3]
         return copy
 
     def to_blue(self, array):
@@ -38,6 +39,10 @@ class ColorFilter:
         -------
             This function should not raise any Exception.
         """
+        copy = np.copy(arr)
+        # ref: https://stackoverflow.com/questions/47382482/inverting-pixels-of-an-rgb-image-in-python
+        copy[:, :, :3] = 0.3 - copy[:, :, :3]
+        return copy
 
     def to_green(self, array):
         """
@@ -116,4 +121,4 @@ if __name__ == "__main__":
     arr = ip.load("./elon_canaGAN.png")
 
     cf = ColorFilter()
-    cf.invert(arr)
+    ip.display(cf.invert(arr))
