@@ -2,6 +2,8 @@ from hashlib import new
 import numpy as np
 
 
+#TODO: exceptions
+
 class ScrapBooker():
     def __init__(self) -> None:
         pass
