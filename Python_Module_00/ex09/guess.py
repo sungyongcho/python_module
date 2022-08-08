@@ -30,14 +30,13 @@ if __name__ == "__main__":
     print('')
     while (True):
         user_input = get_user_input()
-        if  user_input == 'exit':
+        if user_input == 'exit':
             break
         try:
             float(user_input)
         except ValueError:
             print("That's not a number.")
             continue
-
         count += 1
         try:
             user_input = int(user_input)
