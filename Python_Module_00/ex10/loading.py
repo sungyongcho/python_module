@@ -4,9 +4,10 @@ from tqdm import tqdm
 from time import sleep
 
 
-# ref: https://stackoverflow.com/questions/68211844/python-change-tqdm-bar-style
-#      https://stackoverflow.com/questions/54362541/how-to-change-tqdms-bar-size
-#      https://stackoverflow.com/questions/57473107/how-to-set-the-r-bar-part-of-tqdm
+# ref:
+#   https://stackoverflow.com/questions/68211844/python-change-tqdm-bar-style
+#   https://stackoverflow.com/questions/54362541/how-to-change-tqdms-bar-size
+#   https://stackoverflow.com/questions/57473107/how-to-set-the-r-bar-part-of-tqdm
 
 
 def ft_progress(listy):
