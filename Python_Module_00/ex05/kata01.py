@@ -2,11 +2,7 @@
 kata = {
     'Python': 'Guido van Rossum',
     'Ruby': 'Yukihiro Matsumoto',
-    'PHP': 'Rasmusi Lerdorf',
-    'PHP': 'Rasmusi Lerdorf',
-    'aaa': 'Rasmusi Lerdorf',
-    'bbb': 'Rasmusi Lerdorf',
-    'ccc': 'Rasmusi Lerdorf',
+    'PHP': 'Rasmus Lerdorf',
 }
 
 for key, value in kata.items():

@@ -1,5 +1,5 @@
 # Put this at the top of your kata03.py file
-kata = "heljdhddehh"
+kata = "The right format"
 
 length = 42 - len(kata)
 
