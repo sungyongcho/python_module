@@ -7,4 +7,4 @@ print(
     str(f"{kata[2]:.2f}") + ",",
     str(f"{kata[3]:.2e}") + ",",
     str(f"{kata[4]:.2e}")
-    )
+)
