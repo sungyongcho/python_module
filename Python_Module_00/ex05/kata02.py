@@ -1,5 +1,5 @@
 # Put this at the top of your kata02.py file
-kata = (2019, 9, 25, 3, 30)
+kata = (8, 32, 2022, 12, 1)
 
 print(str(f"{kata[1]:02d}") +
       "/" +

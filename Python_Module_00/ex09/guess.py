@@ -26,14 +26,25 @@ def get_user_input():
 if __name__ == "__main__":
     welcome_message()
     count = 0
-    # print(answer)
+    print(answer)
     print('')
-    user_input = get_user_input()
-    while (user_input != 'exit'):
-        count += 1
-        if not user_input.isdigit():
+    while (True):
+        user_input = get_user_input()
+        if  user_input == 'exit':
+            break
+        try:
+            float(user_input)
+        except ValueError:
             print("That's not a number.")
-        elif (int(user_input) == answer):
+            continue
+
+        count += 1
+        try:
+            user_input = int(user_input)
+        except ValueError:
+            print("number range not accepted (integer only)")
+            continue
+        if user_input == answer:
             if (answer == 42):
                 print("The answer to the ultimate question of life,",
                       "the universe and everything is 42.")
@@ -43,11 +54,10 @@ if __name__ == "__main__":
                 print("Congratulations, you've got it!")
                 print("You won in " + str(count) + " attempts!", end="\n")
             break
-        elif (0 > int(user_input) or int(user_input) > 99):
+        elif (1 > user_input or user_input > 99):
             print("number ranger not accepted.")
-        elif (int(user_input) > answer):
+        elif (user_input > answer):
             print("Too High!")
         else:
             print("Too Low!")
-        user_input = get_user_input()
     print("Goodbye!")
