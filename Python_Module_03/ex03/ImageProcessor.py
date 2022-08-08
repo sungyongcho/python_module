@@ -13,6 +13,7 @@ class ImageProcessor():
         try:
             im = mpimg.imread(path)
             print("Loading image of dimensions", im.shape[0], "x", im.shape[1])
+            print(im)
             return im
         except Exception as e:
             print(f"Exception : {e.__class__.__name__} -- strerror: {e}")
@@ -22,7 +23,7 @@ class ImageProcessor():
         # tmp = np.multiply(array[:, :, 0:3], 255)
         # img = Image.fromarray(array, 'RGB')
 
-        plt.figure('loaded image')
+        fig = plt.figure('loaded image')
         plt.imshow(array)
         plt.axis('off')
         plt.show()

@@ -1,3 +1,4 @@
+from ImageProcessor import ImageProcessor
 import numpy as np
 
 
@@ -20,7 +21,7 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        copy = np.copy(arr)
+        copy = np.copy(array)
         # ref: https://stackoverflow.com/questions/47382482/inverting-pixels-of-an-rgb-image-in-python
         copy[:, :, :3] = 1 - copy[:, :, :3]
         return copy
@@ -39,9 +40,8 @@ class ColorFilter:
         -------
             This function should not raise any Exception.
         """
-        copy = np.copy(arr)
-        # ref: https://stackoverflow.com/questions/47382482/inverting-pixels-of-an-rgb-image-in-python
-        copy[:, :, :3] = 0.3 - copy[:, :, :3]
+        copy = np.zeros(array.shape)
+        copy[..., 2:] = array[..., 2:]
         return copy
 
     def to_green(self, array):
@@ -58,6 +58,9 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
+        copy = np.copy(array)
+        copy[..., :3:2] = copy[..., :3:2] * 0
+        return copy
 
     def to_red(self, array):
         """
@@ -73,6 +76,10 @@ class ColorFilter:
         -------
             This function should not raise any Exception.
         """
+        copy = np.copy(array)
+        copy = copy - (self.to_blue(array) + self.to_green(array))
+        copy[..., 3:] = array[..., 3:]
+        return copy
 
     def to_celluloid(self, array):
         """
@@ -114,11 +121,10 @@ class ColorFilter:
             This function should not raise any Exception.
         """
 
-from ImageProcessor import ImageProcessor
 
 if __name__ == "__main__":
     ip = ImageProcessor()
     arr = ip.load("./elon_canaGAN.png")
-
+    print(arr)
     cf = ColorFilter()
-    ip.display(cf.invert(arr))
+    ip.display(cf.to_red(arr))
