@@ -30,7 +30,7 @@ if __name__ == "__main__":
     elif (len(sys.argv) == 1):
         print("Usage: python operations.py <number1> <number2>")
         print("Example:\n\tpython operations.py 10 3")
-    elif (sys.argv[1].isdigit() is False or sys.argv[2].isdigit() is False):
+    elif (sys.argv[1].lstrip('-').isdigit() is False or sys.argv[2].lstrip('-').isdigit() is False):
         raise AssertionError("only integers")
     else:
         operations(int(sys.argv[1]), int(sys.argv[2]))
