@@ -6,7 +6,7 @@ from vector import Vector
 
 # row vector
 print("# row vector")
-print()
+print("")
 print(Vector([[1., 2.]]).shape)
 print(Vector([[1., 2.]]).values)
 print()
@@ -74,6 +74,10 @@ i = Vector([[1., 2., 3.]]) / 3
 
 j = Vector([[4.], [5.], [6.]]) / 3
 
+# truediv with NotImplementedError (uncomment to test)
+
+# ii =  Vector([[1., 2., 3.]]) / Vector([[1., 2., 3.]])
+
 print(i.values)
 print(j.values)
 
@@ -89,6 +93,10 @@ print(j.values)
 m = Vector([[1., 2., 3.]]) * 3
 
 n = Vector([[4.], [5.], [6.]]) * 3
+
+# mul with NotImplementedError (uncomment to test)
+
+# mm = Vector([[1., 2., 3.]]) * Vector([[1., 2., 3.]])
 
 print(m.values)
 print(n.values)

@@ -130,8 +130,11 @@ class Vector:
         return Vector([tmp])
 
     def __truediv__(self, var):
+        if isinstance(var, Vector):
+            raise NotImplementedError(
+                "Division of a Vector by a Vector is not implemented here.")
         if not any([isinstance(var, t) for t in [float, int, complex]]):
-            raise ValueError("division only accepts scalar. (real number")
+            raise ValueError("division only accepts scalar. (real number)")
         dimension_check = self.shape.index(max(self.shape))
         if dimension_check == 1:
             return self.__row_loop(var, "/")
@@ -140,9 +143,12 @@ class Vector:
 
     def __rtruediv__(self, var):
         raise NotImplementedError(
-            "Division of a scalar by a Vector is notdefined here.")
+            "Division of a scalar by a Vector is not implemented here.")
 
     def __mul__(self, var):
+        if isinstance(var, Vector):
+            raise NotImplementedError(
+                "Multiplication of a Vector by a Vector is not implemented here.")
         if not any([isinstance(var, t) for t in [float, int, complex]]):
             raise ValueError(
                 "multiplication only accepts scalar. (real number)")
