@@ -38,16 +38,3 @@ class Book:
         """Add a recipe to the book and update last_update"""
         self.recipes_list[recipe.recipe_type].add(recipe)
         self.last_update = datetime.datetime.now()
-
-
-aaa = Book()
-
-bbb = Recipe('aaa', 1, ['', 'aa', 'bb'],
-             "aaaaaaaaaa bbbbbbbbbb. dddddddddd.", "LUnch")
-
-aaa.add_recipe(bbb)
-
-print(aaa.last_update)
-print(aaa.get_recipe_by_name('aaa'))
-# print(aaa.get_recipes_by_types('lunch'))
-print(aaa.get_recipes_by_types('lunch'))
