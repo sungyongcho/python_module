@@ -26,7 +26,7 @@ def get_user_input():
 if __name__ == "__main__":
     welcome_message()
     count = 0
-    print(answer)
+    # print("answer:", answer)
     print('')
     while (True):
         user_input = get_user_input()
