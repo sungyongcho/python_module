@@ -1,6 +1,9 @@
 from ImageProcessor import ImageProcessor
 import numpy as np
 
+# ref:
+# https://numpy.org/devdocs/user/basics.indexing.html#dimensional-indexing-tools
+
 
 class ColorFilter:
 
@@ -41,7 +44,7 @@ class ColorFilter:
             This function should not raise any Exception.
         """
         copy = np.zeros(array.shape)
-        copy[..., 2:] = array[..., 2:]
+        copy[:, :, 2:] = array[:, :, 2:]
         return copy
 
     def to_green(self, array):
@@ -59,7 +62,7 @@ class ColorFilter:
         This function should not raise any Exception.
         """
         copy = np.copy(array)
-        copy[..., :3:2] = copy[..., :3:2] * 0
+        copy[..., : 3:2] = copy[..., : 3:2] * 0
         return copy
 
     def to_red(self, array):
