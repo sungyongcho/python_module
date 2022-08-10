@@ -49,6 +49,12 @@ class Bank(object):
 
         if any(account == item for item in self.accounts):
             return False
+        return True
+
+    def __search_by_name(self, name) -> Account:
+        for account in self.accounts:
+            if account.__dict__['name'] == name:
+                return account
 
     def add(self, new_account):
         """ Add new_account in the Bank
@@ -61,8 +67,10 @@ class Bank(object):
             return False
 
         self.accounts.append(new_account)
+        return True
 
     def transfer(self, origin, dest, amount):
+        print(self.accounts[0].__dict__)
         """" Perform the fund transfer
             @origin: str(name) of the first account
             @dest: str(name) of the destination account
@@ -71,17 +79,31 @@ class Bank(object):
         """
         if amount < 0:
             return False
-        if origin.__dict__['value'] < amount:
+        if (self.__search_by_name(origin) is None or
+                self.__search_by_name(dest) is None):
             return False
-        if not (self.__verify(origin) and self.__verify(dest)):
+        if (origin == dest):
+            return True
+        origin_account = self.__search_by_name(origin)
+        dest_account = self.__search_by_name(dest)
+        if not (self.__verify(origin_account) or self.__verify(dest_account)):
             return False
+
+        if origin_account['amount'] < amount:
+            return False
+        origin_account.transfer(-amount)
+        dest_account.transfer(amount)
+        return True
 
     def fix_account(self, name):
         """ fix account associated to name if corrupted
             @name: str(name) of the account
             @return True if success, False if an error occured
         """
-        # ... Your code ...
+        if not isinstance(name, str):
+            return False
+        if self.__search_by_name(name) is None:
+            return False
 
 
 if __name__ == "__main__":
