@@ -1,0 +1,7 @@
+List where data from:
+
+# ex00
+- https://www.kaggle.com/datasets/wenruliu/adult-income-dataset?resource=download
+
+# ex01
+- https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results

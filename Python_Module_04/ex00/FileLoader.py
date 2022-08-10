@@ -25,7 +25,7 @@ class FileLoader():
 
 if __name__ == "__main__":
     loader = FileLoader()
-    # data got from:
+    # data from:
     # https://www.kaggle.com/datasets/wenruliu/adult-income-dataset?resource=download
     data = loader.load("../data/adult_data.csv")
 
