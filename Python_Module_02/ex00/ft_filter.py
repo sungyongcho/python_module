@@ -10,7 +10,6 @@ def ft_filter(function_to_apply, iterable):
         An iterable.
         None if the iterable can not be used by the function.
     """
-    # ... Your code here ...
     if not (isinstance(iterable, list) or
             isinstance(iterable, tuple) or
             iter(iterable) is not None):
