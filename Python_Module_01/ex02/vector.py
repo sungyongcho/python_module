@@ -31,13 +31,13 @@ class Vector:
             # print(len(values))
             self.shape = (len(values), 1)
 
-    def dot_row(self, vector):
+    def _dot_row(self, vector):
         output = 0
         for i in range(0, max(self.shape)):
             output += (self.values[0][i] * vector.values[0][i])
         return output
 
-    def dot_column(self, vector):
+    def _dot_column(self, vector):
         output = 0
         for i in range(0, max(self.shape)):
             output += (self.values[i][0] * vector.values[i][0])
@@ -48,17 +48,17 @@ class Vector:
             raise ValueError("the shape must be the same")
         dimension_check = self.shape.index(max(self.shape))
         if dimension_check == 1:
-            return self.dot_row(vector)
+            return self._dot_row(vector)
         else:
-            return self.dot_column(vector)
+            return self._dot_column(vector)
 
-    def T_row_to_col(self):
+    def _T_row_to_col(self):
         tmp = []
         for i in range(0, max(self.shape)):
             tmp.append([self.values[0][i]])
         return Vector(tmp)
 
-    def T_col_to_row(self):
+    def _T_col_to_row(self):
         tmp = []
         for i in range(0, max(self.shape)):
             tmp.append(self.values[i][0])
@@ -69,9 +69,9 @@ class Vector:
         if (self.shape == (1, 1)):
             return self
         if dimension_check == 1:
-            return self.T_row_to_col()
+            return self._T_row_to_col()
         else:
-            return self.T_col_to_row()
+            return self._T_col_to_row()
 
     def __add__(self, other):
         if not isinstance(other, Vector):
