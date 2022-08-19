@@ -104,7 +104,7 @@ class Bank(object):
         if not self.__security_check(dest_account):
             print("Verification for account", dest_account.name, "failed")
             return False
-        if origin_account['amount'] < amount:
+        if origin_account.__dict__['value'] < amount:
             print("insufficient amount for origin account.")
             return False
         origin_account.transfer(-amount)
@@ -123,13 +123,37 @@ class Bank(object):
 
         target_account = self.__search_by_name(name)
 
+        filtered = {k: v for k, v in target_account.__dict__.items() if v is not None}
+        target_account.__dict__.clear()
+        target_account.__dict__.update(filtered)
 
-        # for key, value in target_account.__dict__.items():
-        #     if value is None:
-        #         del target_account.__dict__[key]
+        for key, value in target_account.__dict__.items():
+            if key[0] == 'b':
+                target_account.__dict__[key[1:]] = target_account.__dict__.pop(key)
 
-        print(self.__search_by_name(name).__dict__)
+        if not any(key.startswith('zip') or key.startswith('addr')
+                   for key, value in target_account.__dict__.items()):
+            return False
 
+        if not {'name', 'id', 'value'}.issubset(target_account.__dict__.keys()):
+            return False
+
+        try:
+            target_account.__dict__['name'] = str(target_account.__dict__['name'])
+        except:
+            return False
+
+        try:
+            target_account.__dict__['id'] = id(target_account.__dict__['id'])
+        except:
+            return False
+
+        try:
+            target_account.__dict__['value'] = float(target_account.__dict__['value'])
+        except:
+            return False
+
+        return True
 
 if __name__ == "__main__":
     print("hello world")
