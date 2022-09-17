@@ -14,6 +14,12 @@ ops = {"+": operator.add,
 class Vector:
 
     def __init__(self, values):
+        # a list of a list of floats: Vector([[0.0, 1.0, 2.0, 3.0]]),
+        # • a list of lists of single float: Vector([[0.0], [1.0], [2.0], [3.0]]),
+        # • a size: Vector(3) -> the vector will have values = [[0.0], [1.0], [2.0]],
+        # • a range: Vector((10,16)) -> the vector will have values = [[10.0], [11.0],
+        #            [12.0], [13.0], [14.0], [15.0]]. in Vector((a,b)), if a > b, you must display accurate error message
+        ##
         if not (any(isinstance(i, list) for i in values) or isinstance(values, list)):
             raise TypeError("vector must have a list given")
         else:

@@ -1,3 +1,16 @@
+import random
+# ref:
+# https://stackoverflow.com/questions/27437363/how-do-you-create-a-program-that-shuffles-a-list-without-using-the-shuffle-fun
+
+
+def list_randomizer(lst):
+    result = []
+    while len(lst) > 0:
+        index = random.randrange(0, len(lst))
+        result.append(lst.pop(index))
+    return result
+
+
 def generator(text, sep=" ", option=None):
     """Splits the text according to sep value and yield the substrings.
     option precise if a action is performed to the substrings before it is yielded.
@@ -11,7 +24,7 @@ def generator(text, sep=" ", option=None):
         if option is None:
             split_list = text.split(sep)
         elif option == "shuffle":
-            split_list = set(text.split(sep))
+            split_list = list_randomizer(list(text.split(sep)))
         elif option == "unique":
             split_list = list(dict.fromkeys(text.split(sep)))
         elif option == "ordered":

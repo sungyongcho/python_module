@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import sys
 import datetime
 
@@ -25,7 +26,8 @@ class Book:
         }
 
     def get_recipe_by_name(self, name):
-        """Prints a recipe with the name \texttt{name} and returns the instance"""
+        """Prints a recipe with the name \texttt{name} and returns the \
+            instance"""
         result = None
         for recipe_set in self.recipes_list.values():
             for recipe in recipe_set:
@@ -40,7 +42,7 @@ class Book:
         if not (recipe_type == "starter" or
                 recipe_type == "lunch" or
                 recipe_type == "dessert"):
-            raise AttributeError(
+            raise ValueError(
                 "recipe_type must be starter, lunch, or dessert")
         name_list = []
         if not (self.recipes_list.get(recipe_type)):
