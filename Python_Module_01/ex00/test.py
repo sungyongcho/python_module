@@ -1,13 +1,14 @@
 from book import Book
 from recipe import Recipe
 
-recipe_aaa = Recipe('aaa', 1, ['', 'aa', 'bb'], "bbbbbbbbbb.", "LUnch")
+recipe_aaa = Recipe('aaa', 1, 10, ['', 'aa', 'bb'], "bbbbbbbbbb.", "LUnch")
 
-recipe_bbb = Recipe('bbb', 2, ['', 'cc', 'dd'], "dddddddddd.", "starTER")
+recipe_bbb = Recipe('bbb', 2, 10, ['', 'cc', 'dd'], "dddddddddd.", "starTER")
 
 print("==========recipe_aaa==========")
 print(recipe_aaa.name)
 print(recipe_aaa.cooking_lvl)
+print(recipe_aaa.cooking_time)
 print(recipe_aaa.ingredients)
 print(recipe_aaa.description)
 print(recipe_aaa.recipe_type)
@@ -18,6 +19,7 @@ print("==========recipe_aaa==========")
 print("==========recipe_bbb==========")
 print(recipe_bbb.name)
 print(recipe_bbb.cooking_lvl)
+print(recipe_aaa.cooking_time)
 print(recipe_bbb.ingredients)
 print(recipe_bbb.description)
 print(recipe_bbb.recipe_type)

@@ -36,3 +36,23 @@ if __name__ == '__main__':
     print(Evaluator.zip_evaluate(coefs, words))
     print("# Enumerate")
     print(Evaluator.enumerate_evaluate(coefs, words))
+
+    print("--------------------------------")
+
+    words = ["Le"]
+    coefs = [1.0]
+
+    print("# Zip")
+    print(Evaluator.zip_evaluate(coefs, words))
+    print("# Enumerate")
+    print(Evaluator.enumerate_evaluate(coefs, words))
+
+    print("--------------------------------")
+
+    words = ["Le", "el"]
+    coefs = [3.0, 0.0]
+
+    print("# Zip")
+    print(Evaluator.zip_evaluate(coefs, words))
+    print("# Enumerate")
+    print(Evaluator.enumerate_evaluate(coefs, words))

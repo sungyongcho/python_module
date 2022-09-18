@@ -5,13 +5,8 @@ import sys
 
 
 class Recipe:
-    name = int()
-    cooking_lvl = 0
-    ingredients = []
-    description = ""
-    recipe_type = ""
 
-    def __init__(self, name, cooking_lvl, ingredients,
+    def __init__(self, name, cooking_lvl, cooking_time, ingredients,
                  description, recipe_type):
         if not isinstance(name, str):
             raise ValueError("value must be string")
@@ -26,6 +21,14 @@ class Recipe:
             raise ValueError("cooking_lvl must be between 1 and 5")
         else:
             self.cooking_lvl = cooking_lvl
+
+        if not isinstance(cooking_time, int):
+            raise ValueError("cooking_time must be an integer")
+        elif not (int(cooking_time) > 0):
+            raise ValueError(
+                "cooking_time must be bigger than 0 (no negative numbers)")
+        else:
+            self.cooking_time = cooking_time
 
         tmp = []
         for i in range(len(ingredients)):
