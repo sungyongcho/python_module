@@ -20,8 +20,28 @@ class Vector:
         # • a range: Vector((10,16)) -> the vector will have values = [[10.0], [11.0],
         #            [12.0], [13.0], [14.0], [15.0]]. in Vector((a,b)), if a > b, you must display accurate error message
         ##
-        if not (any(isinstance(i, list) for i in values) or isinstance(values, list)):
-            raise TypeError("vector must have a list given")
+        if (isinstance(values, int)):
+            if (values < 0):
+                raise ValueError(
+                    "Vector must be initialized with appropriate data (int, negative)")
+            self.values = []
+            for i in range(values):
+                self.values.append([float(i)])
+        elif (isinstance(values, tuple)):
+            if not (len(values) == 2):
+                raise ValueError(
+                    "Vector must be initialized with appropriate data (tuple, length)")
+            if not (isinstance(values[0], int) and isinstance(values[1], int)):
+                raise ValueError(
+                    "Vector must be initialized with appropriate data (tuple, data type)")
+            if not (values[0] < values[1]):
+                raise ValueError(
+                    "Vector must be initialized with appropriate data (tuple, range)")
+            self.values = []
+            for i in range(values[0], values[1]):
+                self.values.append([float(i)])
+        elif not (any(isinstance(i, list) for i in values) and isinstance(values, list)):
+            raise TypeError("vector must be initialized with appropriate data")
         else:
             for list_inside in values:
                 for j in list_inside:
@@ -30,12 +50,12 @@ class Vector:
 
             self.values = values
 
-        if len(values) == 1:
+        if len(self.values) == 1:
             # print(len(values[0]))
-            self.shape = (1, len(values[0]))
+            self.shape = (1, len(self.values[0]))
         else:
             # print(len(values))
-            self.shape = (len(values), 1)
+            self.shape = (len(self.values), 1)
 
     def dot_row(self, vector):
         output = 0
