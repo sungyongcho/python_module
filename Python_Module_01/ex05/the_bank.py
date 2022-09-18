@@ -163,7 +163,6 @@ if __name__ == "__main__":
     the_bank.add(a)
     print(the_bank.accounts)
 
-    aa = Account("a")
     del aa.__dict__['id']
     print(aa.__dict__)
     the_bank.add(aa)
