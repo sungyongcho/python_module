@@ -40,12 +40,17 @@ class Vector:
             self.values = []
             for i in range(values[0], values[1]):
                 self.values.append([float(i)])
-        elif not (any(isinstance(i, list) for i in values) and isinstance(values, list)):
-            raise TypeError("vector must be initialized with appropriate data")
+        # elif not (any(isinstance(i, list) for i in values) and isinstance(values, list)):
+            # raise TypeError("vector must be initialized with appropriate data")
         else:
             for list_inside in values:
-                for j in list_inside:
-                    if not (isinstance(j, float)):
+                if isinstance(list_inside, list):
+                    for j in list_inside:
+                        if not (isinstance(j, float)):
+                            raise TypeError(
+                                "The element must be float type")
+                else:
+                    if not (isinstance(list_inside, float)):
                         raise TypeError("The element must be float type")
 
             self.values = values
