@@ -117,19 +117,23 @@ class Bank(object):
             @return True if success, False if an error occured
         """
         if not isinstance(name, str):
+            print("Error: name is not an instance of str")
             return False
         if self.__search_by_name(name) is None:
+            print("Error: name not found")
             return False
 
         target_account = self.__search_by_name(name)
 
-        filtered = {k: v for k, v in target_account.__dict__.items() if v is not None}
+        filtered = {k: v for k, v in target_account.__dict__.items()
+                    if v is not None}
         target_account.__dict__.clear()
         target_account.__dict__.update(filtered)
 
         for key, value in target_account.__dict__.items():
             if key[0] == 'b':
-                target_account.__dict__[key[1:]] = target_account.__dict__.pop(key)
+                target_account.__dict__[
+                    key[1:]] = target_account.__dict__.pop(key)
 
         if not any(key.startswith('zip') or key.startswith('addr')
                    for key, value in target_account.__dict__.items()):
@@ -139,7 +143,8 @@ class Bank(object):
             return False
 
         try:
-            target_account.__dict__['name'] = str(target_account.__dict__['name'])
+            target_account.__dict__['name'] = str(
+                target_account.__dict__['name'])
         except:
             return False
 
@@ -149,31 +154,46 @@ class Bank(object):
             return False
 
         try:
-            target_account.__dict__['value'] = float(target_account.__dict__['value'])
+            target_account.__dict__['value'] = float(
+                target_account.__dict__['value'])
         except:
             return False
 
         return True
 
+
 if __name__ == "__main__":
-    print("hello world")
-    the_bank = Bank()
-    a = Account("a")
-    print(the_bank.__dict__)
-    the_bank.add(a)
-    print(the_bank.accounts)
+    bank = Bank()
+    john = Account(
+        'William John',
+        zip='100-064',
+        brother="heyhey",
+        value=6460.0,
+        ref='58ba2b9954cd278eda8a84147ca73c87',
+        info=None,
+        other='This is the vice president of the corporation',
+        lol="hihi"
+    )
 
-    aa = Account("a")
-    del aa.__dict__['id']
-    print(aa.__dict__)
-    the_bank.add(aa)
-    print(the_bank.accounts)
+    bank.fix_account(john)
+# print("hello world")
+# the_bank = Bank()
+# a = Account("a")
+# print(the_bank.__dict__)
+# the_bank.add(a)
+# print(the_bank.accounts)
 
-    c = Account("c", zipcode=111, addr="aaa", value=1.2)
-    # d.__dict__['id'] = 1.1
-    print(c.__dict__)
-    the_bank.add(c)
-    print(the_bank.accounts)
+# aa = Account("a")
+# del aa.__dict__['id']
+# print(aa.__dict__)
+# the_bank.add(aa)
+# print(the_bank.accounts)
 
-    the_bank.add(c)
-    print(the_bank.accounts)
+# c = Account("c", zipcode=111, addr="aaa", value=1.2)
+# # d.__dict__['id'] = 1.1
+# print(c.__dict__)
+# the_bank.add(c)
+# print(the_bank.accounts)
+
+# the_bank.add(c)
+# print(the_bank.accounts)

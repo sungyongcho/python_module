@@ -6,10 +6,6 @@ ops = {"+": operator.add,
        "*": operator.mul,
        "/": operator.truediv}
 
-# todo:
-# exeception handling for elements of vector
-# raise NotImplemented for vector * vector
-
 
 class Vector:
 
