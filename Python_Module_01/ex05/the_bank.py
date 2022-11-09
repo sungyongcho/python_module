@@ -1,3 +1,4 @@
+# TODO: fix fix_account function in progress
 class Account(object):
 
     ID_COUNT = 1
