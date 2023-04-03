@@ -14,11 +14,43 @@ class Account(object):
 
         if self.value < 0:
             raise AttributeError("Attribute value cannot be negative.")
+
         if not isinstance(self.name, str):
             raise AttributeError("Attribute name must be a str object.")
-
     def transfer(self, amount):
         self.value += amount
+
+    def check_corrupted(self):
+        if not hasattr(self, 'value'):
+            raise AttributeError("the 'value' Attribute does not exist.")
+
+        if len(self.__dict__) % 2 == 0:
+            print("account with even number attribute is--corrupted")
+            return False
+
+        for key, value in self.__dict__.items():
+            if key[0] == 'b':
+                print("beginning of name of key cannot be start with b--corrupted")
+                return False
+
+        if not any(key.startswith('zip') or key.startswith('addr')
+                   for key, value in self.__dict__.items()):
+            print("account with no zip or addr is--corrupted")
+            return False
+
+        if not {'name', 'id', 'value'}.issubset(self.__dict__.keys()):
+            print("account with no 'name', 'id', 'value' is--corrupted")
+            return False
+
+        if not (isinstance(self.__dict__['name'], str) and
+                isinstance(self.__dict__['id'], int) and (
+                    isinstance(self.__dict__['value'], float) or
+                    isinstance(self.__dict__['value'], int))
+                ):
+            return False
+
+        return True
+
 
 
 class Bank(object):
@@ -58,7 +90,9 @@ class Bank(object):
         return True
 
     def __search_by_name(self, name) -> Account:
+        print(name)
         for account in self.accounts:
+            print(account.__dict__['name'])
             if account.__dict__['name'] == name:
                 return account
         return None
@@ -72,7 +106,6 @@ class Bank(object):
         # it can be appended to the attribute accounts
         if not isinstance(new_account, Account):
             return False
-        print("1", new_account.__dict__['name'])
         if any(new_account.__dict__['name'] == item.__dict__['name']
                 for item in self.accounts):
             return False
@@ -131,10 +164,15 @@ class Bank(object):
         target_account.__dict__.clear()
         target_account.__dict__.update(filtered)
 
+        keys_to_delete = []
         for key, value in target_account.__dict__.items():
             if key[0] == 'b':
-                target_account.__dict__[
-                    key[1:]] = target_account.__dict__.pop(key)
+                print(key)
+                keys_to_delete.append(key)
+
+        for key in keys_to_delete:
+            del target_account.__dict__[key]
+
 
         if not any(key.startswith('zip') or key.startswith('addr')
                    for key, value in target_account.__dict__.items()):
@@ -154,47 +192,116 @@ class Bank(object):
         except:
             return False
 
-        try:
-            target_account.__dict__['value'] = float(
-                target_account.__dict__['value'])
-        except:
-            return False
+        if len(target_account.__dict__) % 2 == 0:
+            target_account.odd_maker = True
 
         return True
 
 
 if __name__ == "__main__":
-    bank = Bank()
-    john = Account(
-        'William John',
-        zip='100-064',
-        brother="heyhey",
-        value=6460.0,
-        ref='58ba2b9954cd278eda8a84147ca73c87',
-        info=None,
-        other='This is the vice president of the corporation',
-        lol="hihi"
-    )
 
-    bank.fix_account(john)
-# print("hello world")
-# the_bank = Bank()
-# a = Account("a")
-# print(the_bank.__dict__)
-# the_bank.add(a)
-# print(the_bank.accounts)
+    print("hello world")
+    the_bank = Bank()
+    a = Account("a")
+    print(the_bank.__dict__)
+    the_bank.add(a)
+    print(the_bank.accounts)
 
-# aa = Account("a")
-# del aa.__dict__['id']
-# print(aa.__dict__)
-# the_bank.add(aa)
-# print(the_bank.accounts)
+    aa = Account("a")
+    del aa.__dict__['id']
+    print(aa.__dict__)
+    the_bank.add(aa)
+    print(the_bank.accounts)
 
-# c = Account("c", zipcode=111, addr="aaa", value=1.2)
-# # d.__dict__['id'] = 1.1
-# print(c.__dict__)
-# the_bank.add(c)
-# print(the_bank.accounts)
+    c = Account("c", zipcode=111, addr="aaa", value=1.2)
+    # d.__dict__['id'] = 1.1
+    print(c.__dict__)
+    the_bank.add(c)
+    print(the_bank.accounts)
 
-# the_bank.add(c)
-# print(the_bank.accounts)
+    the_bank.add(c)
+    print(the_bank.accounts)
+
+
+    # bank = Bank()
+    # john = Account(
+    #     'William John',
+    #     zip='100-064',
+    #     brother="heyhey",
+    #     value=6460.0,
+    #     ref='58ba2b9954cd278eda8a84147ca73c87',
+    #     info=None,
+    #     other='This is the vice president of the corporation',
+    #     lol="hihi"
+    # )
+    # print(john.__dict__)
+    # bank.add(john)
+    # print("before", john.check_corrupted())
+    # print("fix", bank.fix_account("William John"))
+    # print(john.__dict__)
+    # print("after", john.check_corrupted())
+    # print(type(john.__dict__['name']))
+    # print(type(john.__dict__['id']))
+    # print(type(john.__dict__['value']))
+
+    # john = Account(
+    #     'William John',
+    #     zip='100-064',
+    #     rother="heyhey",
+    #     value=6460.0,
+    #     ref='58ba2b9954cd278eda8a84147ca73c87',
+    #     info=None,
+    #     other='This is the vice president of the corporation',
+    # )
+
+    # print("corrupted:", john.check_corrupted())
+    # print(bank.fix_account("William John"))
+
+    # john = Account(
+    #     'William John',
+    #     zip='100-064',
+    #     rother="heyhey",
+    #     ref='58ba2b9954cd278eda8a84147ca73c87',
+    #     info=None,
+    #     other='This is the vice president of the corporation',
+    #     lol = "lolilol"
+    # )
+
+    # print(john.__dict__)
+    # print("check:", john.check_corrupted())
+
+    # # bank.add(john)
+
+    # # print(bank.fix_account("William John"))
+    # # print("check:", john.check_corrupted())
+
+    # print("-------------------")
+    # bank.add(
+    # Account(
+    #     'Jane',
+    #     zip='911-745',
+    #     value=1000.0,
+    #     ref='1044618427ff2782f0bbece0abd05f31'
+    #     )
+    # )
+
+    # jhon = Account(
+    #     'Jhon',
+    #     zip='911-745',
+    #     value=1000.0,
+    #     ref='1044618427ff2782f0bbece0abd05f31'
+    # )
+
+    # bank.add(jhon)
+
+    # print("testing a valid transfer")
+    # print(jhon.value)
+    # bank.transfer("Jane", "Jhon", 500)
+    # print(jhon.value)
+
+    # bank.transfer("Jane", "Jhon", 1000)
+    # print(jhon.value)
+
+
+
+

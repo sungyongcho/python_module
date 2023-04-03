@@ -1,5 +1,4 @@
 class Evaluator:
-
     def zip_evaluate(coefs, words):
         result = 0
         if len(coefs) != len(words):
